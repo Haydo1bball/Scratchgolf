@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riddle Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+    .riddle-container {
+      margin: 20px auto;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      max-width: 600px;
+      background-color: #f9f9f9;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="riddle-container">
+    <h1>Riddle Generator</h1>
+    <p id="riddle">Click "Generate Riddle" to start!</p>
+    <input type="text" id="answer" placeholder="Your answer here...">
+    <div>
+      <button onclick="checkAnswer()">Submit Answer</button>
+      <button onclick="generateRiddle()">Generate Riddle</button>
+    </div>
+    <p class="feedback" id="feedback"></p>
+  </div>
+
+  <script>
+    const riddles = [
+      {
+        question: "What has to be broken before you can use it?",
+        answer: "egg"
+      },
+      {
+        question: "I’m tall when I’m young, and I’m short when I’m old. What am I?",
+        answer: "candle"
+      },
+      {
+        question: "What has a heart that doesn’t beat?",
+        answer: "artichoke"
+      },
+      {
+        question: "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
+        answer: "echo"
+      },
+      {
+        question: "The more of this there is, the less you see. What is it?",
+        answer: "darkness"
+      }
+    ];
+
+    let currentRiddle = {};
+
+    function generateRiddle() {
+      const randomIndex = Math.floor(Math.random() * riddles.length);
+      currentRiddle = riddles[randomIndex];
+      document.getElementById('riddle').innerText = currentRiddle.question;
+      document.getElementById('answer').value = '';
+      document.getElementById('feedback').innerText = '';
+    }
+
+    function checkAnswer() {
+      const userAnswer = document.getElementById('answer').value.trim().toLowerCase();
+      if (userAnswer === currentRiddle.answer) {
+        document.getElementById('feedback').innerText = 'Correct! 🎉';
+        document.getElementById('feedback').style.color = 'green';
+      } else {
+        document.getElementById('feedback').innerText = `Wrong! The correct answer is "${currentRiddle.answer}".`;
+        document.getElementById('feedback').style.color = 'red';
+      }
+    }
+  </script>
+</body>
+</html>
